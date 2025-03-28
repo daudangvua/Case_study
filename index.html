@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Memory car game</title>
+    <link rel="stylesheet" href="body.css">
 </head>
 <body>
-
+<h1>Game thẻ bài</h1>
+<p><b>Cách chơi:</b> click chuột vào hai thẻ bất kỳ thẻ giống nhau giữ nguyên, thẻ khác nhau úp xuống. Thắng bằng cách cho tất cả thẻ được lật.</p>
+<button value="easy" onclick="setLevel(this)">Dễ</button>
+<button onclick="setLevel(this)">Khó</button>
+<button onclick="setLevel(this)">Siêu khó</button>
+<canvas id="memoryGame"></canvas>
+<script src="cardEasy.js"></script>
 </body>
 </html>
