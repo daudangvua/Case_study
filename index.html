@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <title>Memory car game</title>
     <link rel="stylesheet" href="body.css">
+    <script src="card.js"></script>
 </head>
 <body>
 <h1>Game thẻ bài</h1>
 <p><b>Cách chơi:</b> click chuột vào hai thẻ bất kỳ thẻ giống nhau giữ nguyên, thẻ khác nhau úp xuống. Thắng bằng cách cho tất cả thẻ được lật.</p>
-<button value="easy" onclick="setLevel(this)">Dễ</button>
-<button onclick="setLevel(this)">Khó</button>
-<button onclick="setLevel(this)">Siêu khó</button>
-<canvas id="memoryGame"></canvas>
-<script src="cardEasy.js"></script>
+<h2>Errors: <span id="err">0</span></h2>
+<div id="board">
+</div>
+
 </body>
 </html>
