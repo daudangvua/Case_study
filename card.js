@@ -1,12 +1,13 @@
 let err=0;
-let checkWin=0;
-let conditionWin = (rows*cols)/2
 let cardList = [0,1,2,3,4,5,6,7,8,9];
 
 let cardSet;
 let board =[];
 let rows = 4;//hàng
 let cols = 5;//cột
+
+let checkWin=0;
+let conditionWin = (rows*cols)/2
 
 let card1Selected; //thẻ chon 1
 let card2Selected; //thẻ chọn 2
@@ -86,9 +87,14 @@ function update() {
         if (checkWin == conditionWin) {
             setTimeout(()=> {
                 alert(`You Win`);
+                document.getElementById("restartGame").style.display = "block";
             },1000);
         }
     }
     card1Selected = null;
     card2Selected = null;
+}
+function restartGame() {
+    shuffleCards();
+    startGame()
 }
