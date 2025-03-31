@@ -9,8 +9,16 @@
 <body>
 <h1>Game thẻ bài</h1>
 <p><b>Cách chơi:</b> click chuột vào hai thẻ bất kỳ thẻ giống nhau giữ nguyên, thẻ khác nhau úp xuống. Thắng bằng cách cho tất cả thẻ được lật.</p>
+<h2>Chọn độ khó:</h2>
+<label for="difficulty">Mức độ:</label>
+<select id="difficulty">
+    <option value="2x4">Dễ (2x3)</option>
+    <option value="4x5" selected>Trung bình (4x5)</option>
+    <option value="6x6">Khó (6x6)</option>
+</select>
+<button onclick="startGame()">Bắt đầu</button>
 <h2>Errors: <span id="err">0</span></h2>
+<!--<p>Điểm cao (ít lỗi nhất): <span id="highscore"></span></p>-->
 <div id="board"></div>
-<button id="restartGame" onclick="restartGame()" style="display: none"></button>
 </body>
 </html>
