@@ -1,4 +1,6 @@
 let err=0;
+let checkWin=0;
+let conditionWin = (rows*cols)/2
 let cardList = [0,1,2,3,4,5,6,7,8,9];
 
 let cardSet;
@@ -79,6 +81,13 @@ function update() {
         card2Selected.src = "image/images.jpg";
         err +=1;
         document.getElementById("err").innerHTML = err;
+    } else {
+        checkWin++;
+        if (checkWin == conditionWin) {
+            setTimeout(()=> {
+                alert(`You Win`);
+            },1000);
+        }
     }
     card1Selected = null;
     card2Selected = null;
