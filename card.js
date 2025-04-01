@@ -81,7 +81,7 @@ function startGame() {
         }
         board.push(row);
     }
-    console.log(board);
+    // console.log(board);
     setTimeout(hideCards, 0); //sau 1 giây che đi các thẻ
 }
 
