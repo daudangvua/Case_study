@@ -5,6 +5,7 @@ let cardSet;
 let board =[];
 let rows ;//hàng
 let cols ;//cột
+let timerInterval;
 
 let checkWin=0;
 let conditionWin ;
@@ -26,51 +27,73 @@ function setupGame() {
     }
     conditionWin = (rows * cols) / 2;
 }
+function setupGameTime() {
+    clearInterval(timerInterval);   //đảm bảo không có bộ đếm trước đó
+    let timeLeft = document.getElementById("timeLimit").value;
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = `${timeLeft}`;
+        if (timeLeft < 0) {
+            clearInterval(timerInterval); //dừng bộ đếm
+            alert("Hết thời gian! Bạn đã thua.")
+            disableBoard()
+        }
+    }, 1000);
+}
 
+function disableBoard() {
+    document.getElementById("board").style.pointerEvents = "none";
+}
+function enableBoard() {
+    document.getElementById("board").style.pointerEvents = "auto";
+}
+// trộn thẻ
 function shuffleCards() {
     let totalCards = (rows * cols) / 2;
-    cardSet = cardList.slice(0, totalCards).concat(cardList.slice(0, totalCards));
+    cardSet = cardList.slice(0, totalCards).concat(cardList.slice(0, totalCards));  //tạo danh sách thẻ
     cardSet.sort(() => Math.random() - 0.5);
 }
 
 function startGame() {
+    enableBoard()
     setupGame();
+    setupGameTime()
     err = 0;
     checkWin = 0;
     document.getElementById("err").innerText = err;
     board = [];
     document.getElementById("board").innerHTML = "";
     shuffleCards();
-    document.getElementById("board").style.gridTemplateColumns = `repeat(${cols}, 80px)`;
+    document.getElementById("board").style.gridTemplateColumns = `repeat(${cols}, 80px)`;   //khoảng cách giữa các thẻ
 
     for (let i = 0; i < rows; ++i) {
         let row = [];
         for (let j = 0; j < cols; ++j) {
-            let cardImg = cardSet.pop();
+            let cardImg = cardSet.pop();    // lấy một phần tử từ cuối mảng
             row.push(cardImg);
 
             let card = document.createElement("img");
             card.id = i + "-" + j;
-            card.src = "image/" + cardImg + ".jpg";
-            card.classList.add("card");
-            card.addEventListener("click", selectCard);
-            document.getElementById("board").append(card);
+            card.src = "image/" + cardImg + ".jpg";     //lấy ảnh
+            card.classList.add("card");                 //thêm class CSS
+            card.addEventListener("click", selectCard); // sự kiện chuột
+            document.getElementById("board").append(card);  //thêm card vào div
         }
         board.push(row);
     }
     console.log(board);
-    setTimeout(hideCards, 1000);
+    setTimeout(hideCards, 1000); //sau 1 giây che đi các thẻ
 }
 
 function hideCards() {
     document.querySelectorAll(".card").forEach(card => {
-        card.src = "image/images.jpg";
+        card.src = "image/images.jpg";  //hiển thị mặt sau thẻ
     });
 }
-
+//chọn thẻ
 function selectCard() {
-    if (this.src.includes("image/images")) {
-        if (!card1Selected) {
+    if (this.src.includes("image/images")) {    //chỉ chọn thẻ up
+        if (!card1Selected) {  // nếu chưa chọn thẻ nào
             card1Selected = this;
             let [i, j] = card1Selected.id.split("-").map(Number);
             card1Selected.src = "image/" + board[i][j] + ".jpg";
@@ -82,7 +105,7 @@ function selectCard() {
         }
     }
 }
-
+//kiểm tra 2 thẻ
 function update() {
     if (card1Selected.src !== card2Selected.src) {
         card1Selected.src = "image/images.jpg";
