@@ -82,7 +82,7 @@ function startGame() {
         board.push(row);
     }
     console.log(board);
-    setTimeout(hideCards, 1000); //sau 1 giây che đi các thẻ
+    setTimeout(hideCards, 0); //sau 1 giây che đi các thẻ
 }
 
 function hideCards() {
